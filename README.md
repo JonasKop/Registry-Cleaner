@@ -19,4 +19,6 @@ Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_do
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/registry_cleaner](https://hexdocs.pm/registry_cleaner).
 
-# Registry-Cleaner
+## Deployment
+
+Published at docker hub with name [`jonaskop/registry_cleaner`](https://hub.docker.com/r/jonaskop/registry_cleaner)
