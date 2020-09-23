@@ -1,24 +1,42 @@
 # RegistryCleaner
 
-**TODO: Add description**
+Service which cleans a registry of old tags. When there are more than `MAX_PER_TAG` tags of each base_tag the oldest one will be removed until there are only `MAX_PER_TAG` left. The following configuration will do that operation to the following image tags:
 
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `registry_cleaner` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:registry_cleaner, "~> 0.1.0"}
-  ]
-end
+```sh
+registry.example.com/<image>:prod-*
+registry.example.com/<image>:test-*
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/registry_cleaner](https://hexdocs.pm/registry_cleaner).
+```sh
+# Registry host
+REGISTRY_HOST=registry.example.com
+# Registry protocol, (http or https)
+PROTO=https
+# Tags to delete.
+TAGS=prod,test
+# Registry username
+REGISTRY_USERNAME=username
+# Registry password
+REGISTRY_PASSWORD=password
+# Max available tags per image (All else are deleted starting with the oldest)
+MAX_PER_TAG=10
+# Run every 60 seconds
+RUN_EVERY=60
+```
+
+## Development
+
+During development, provide the correct environment variables and run the code with the following commands:
+
+```sh
+# Run once
+mix run -e RegistryCleaner.main
+# Run as a service
+iex -S mix
+```
 
 ## Deployment
 
 Published at docker hub with name [`jonaskop/registry_cleaner`](https://hub.docker.com/r/jonaskop/registry_cleaner)
+
+To deploy, run the deployment script `./deploy.sh`.
